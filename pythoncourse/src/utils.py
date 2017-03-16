@@ -28,6 +28,17 @@ def download(response, output):
             break
         output.write(data)
         print('Downloaded {bytes}'.format(bytes=total_downloaded))
-        
-        
-        
+
+def extract_filename(filename):
+    return filename.split('.')[0];
+
+def read_data(path):
+    fdata = open(path, 'rt')
+    data = []
+    for line in fdata:
+        linedata = line.split(',')
+        data.append(tuple(linedata))
+    fdata.close()
+    return data
+
+
