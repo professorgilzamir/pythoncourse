@@ -15,8 +15,8 @@ import os
 
 def main():
     RESOURCE_URL = "http://repositorio.dados.gov.br/saude/unidades-saude/unidade-basica-saude/ubs.csv.zip"
-    OUTPUT_PATH = "/home/user/Documentos/pythoncourse/saida.zip"
-    EXTRACTED_PATH = "/home/user/Documentos/pythoncourse" 
+    OUTPUT_PATH = "/home/user/saida.zip"
+    EXTRACTED_PATH = "/home/user/" 
     if len(sys.argv) > 1:
        RESOURCE_URL = sys.argv[1] 
     if len(sys.argv) > 2:
