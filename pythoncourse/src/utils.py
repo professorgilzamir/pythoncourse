@@ -36,8 +36,8 @@ def extract_filename(filename):
     string = ""
     return string.join(filename)
 
-def read_data(path):
-    fdata = open(path, 'rt')
+def loadlistfromcsv(path):
+    fdata = open(path, 'rt', encoding="utf8")
     data = []
     for line in fdata:
         linedata = line.split(',')
