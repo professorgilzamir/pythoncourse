@@ -1,6 +1,6 @@
 '''
 Created on 9 de mar de 2017
-
+Alterado em 16 de mar de 2017
 @author: Gilzamir Gomes
 '''
 
@@ -15,12 +15,6 @@ import os
 
 def main():
     RESOURCE_URL = "http://repositorio.dados.gov.br/saude/unidades-saude/unidade-basica-saude/ubs.csv.zip"
-    if os == "Windows":
-        OUTPUT_PATH = os.path.expanduser("~\saida.zip")
-        EXTRACTED_PATH = os.path.expanduser("~\\")
-    else:
-        OUTPUT_PATH = os.path.expanduser("~/saida.zip")
-        EXTRACTED_PATH = os.path.expanduser("~/")        
     if len(sys.argv) > 1:
         RESOURCE_URL = sys.argv[1] 
     if len(sys.argv) > 2:
