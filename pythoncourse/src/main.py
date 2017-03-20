@@ -43,6 +43,8 @@ def main():
     
     dt = dw.loadlistfromcsv(EXTRACTED_PATH+filename[0])
     
+    teste = dw.create_cidcnes_index(dt)
+    
     for t in dt:
         print(t) 
     
