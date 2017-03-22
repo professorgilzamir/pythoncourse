@@ -1,9 +1,9 @@
 '''
-Created on 9 de mar de 2017
+Alterado on 22 de mar de 2017
 
 Obtém dados em arquivos da internet
-
-@author: Gilzamir (gilzamir@outlook.com)
+O seguinte código já se encontra alterado no repositório original
+@author: André Oliveira
 '''
 
 #coding: utf-8
