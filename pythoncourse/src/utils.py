@@ -30,7 +30,7 @@ def download(response, output):
         output.write(data)
         print('Downloaded {bytes}'.format(bytes=total_downloaded))
 
-def extract_filename(filename):
+def loadlistfromcsv(filename):
     filename = filename.split('.')
     del filename[len(filename) - 1]
     string = ""
