@@ -1,9 +1,11 @@
 '''
-Created on 9 de mar de 2017
+Created on 23 de mar de 2017
 
 Obtém dados em arquivos da internet
 
 @author: Gilzamir (gilzamir@outlook.com)
+
+modificado por Luis Costa
 '''
 
 #coding: utf-8
