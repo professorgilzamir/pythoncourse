@@ -30,6 +30,18 @@ def download(response, output):
         output.write(data)
         print('Downloaded {bytes}'.format(bytes=total_downloaded))
 
+        
+def extract_filename(filename):
+    arquivo = filename.split('.') 
+    s = ""
+    for x in range(0, len(arquivo) - 1):
+        if (x == 0):
+            s += arquivo[x]
+        else :
+            s += "." + arquivo[x]
+    return s
+
+        
 def extract_filename(filename):
     filename = filename.split('.')
     del filename[len(filename) - 1]
