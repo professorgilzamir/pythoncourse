@@ -33,8 +33,7 @@ def download(response, output):
 def extract_filename(filename):
     filename = filename.split('.')
     del filename[len(filename) - 1]
-    string = ""
-    return string.join(filename)
+    return "".join(filename)
 
 def read_data(path):
     fdata = open(path, 'rt', encoding="utf8")
