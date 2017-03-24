@@ -44,4 +44,12 @@ def read_data(path):
     fdata.close()
     return data
 
-
+def loadlistfromcsv(path):
+    fdata = open(path, 'rt', encoding="utf8")
+    lista = []
+     
+    for linha in fdata:
+        lista.append( tuple( linha.split(',') ) )
+        
+    fdata.close()
+    return lista
