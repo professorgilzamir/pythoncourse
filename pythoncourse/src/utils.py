@@ -53,3 +53,11 @@ def loadlistfromcsv(path):
         
     fdata.close()
     return lista
+
+def create_cidcnes_index(lista):
+    dict = {}
+    
+    for t in lista:
+        dict[t[2] + t[3]] = t
+        
+    return dict

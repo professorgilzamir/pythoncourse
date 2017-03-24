@@ -46,9 +46,9 @@ def main():
     filename = [name for name in os.listdir(EXTRACTED_PATH) if '.csv' in name]    
     
     dt = dw.loadlistfromcsv(EXTRACTED_PATH+filename[0])
+    dicio = dw.create_cidcnes_index(dt[1:])
     
-    for t in dt:
-        print(t) 
+    print(dicio) 
     
     print("Finished")
 
