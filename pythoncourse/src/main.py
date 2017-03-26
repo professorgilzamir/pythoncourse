@@ -15,8 +15,8 @@ import os
 
 def main():
     RESOURCE_URL = "http://repositorio.dados.gov.br/saude/unidades-saude/unidade-basica-saude/ubs.csv.zip"
-    OUTPUT_PATH = "/home/user/saida.zip"
-    EXTRACTED_PATH = "/home/user/" 
+    OUTPUT_PATH = "C:/Users/Alailton/Documents/saida.zip"
+    EXTRACTED_PATH = "C:/Users/Alailton/Documents/" 
     if len(sys.argv) > 1:
        RESOURCE_URL = sys.argv[1] 
     if len(sys.argv) > 2:
@@ -39,8 +39,8 @@ def main():
     
     dt = dw.read_data(EXTRACTED_PATH+filename[0])
     
-    for t in dt:
-        print(t) 
+    #for t in dt:
+    #   print(t) 
     
     response.close()
     out_file.close()
