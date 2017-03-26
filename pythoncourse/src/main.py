@@ -12,6 +12,7 @@ import urllib.request as request
 import zipfile
 import utils as dw
 import os
+from src.utils import pesquisa
 
 def main():
     RESOURCE_URL = "http://repositorio.dados.gov.br/saude/unidades-saude/unidade-basica-saude/ubs.csv.zip"
@@ -40,8 +41,9 @@ def main():
                
     dt = dw.read_data(EXTRACTED_PATH+filename[0])
     
-    for t in dt:
-       print(t) 
+    dic = dw.dicionario(dt);
+    
+    print(pesquisa('2800303492', dic))
     
     response.close()
     out_file.close()

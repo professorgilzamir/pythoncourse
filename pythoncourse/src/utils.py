@@ -41,4 +41,12 @@ def read_data(path):
     fdata.close()
     return data
 
+def dicionario(listaLCSV):
+    dic = {}
+    for x in listaLCSV:
+        dic['' + x[2] + x[3]] = x
+    return dic
+
+def pesquisa(str, dic):
+    return dic[str]
 
