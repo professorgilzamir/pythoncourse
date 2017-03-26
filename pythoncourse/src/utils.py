@@ -28,9 +28,9 @@ def download(response, output):
             break
         output.write(data)
         print('Downloaded {bytes}'.format(bytes=total_downloaded))
-
+        
 def extract_filename(filename):
-    return filename.split('.')[0:len(filename.split('.'))-1]
+    return '.'.join(filename.split('.')[0:len(filename.split('.'))-1])
 
 def read_data(path):
     fdata = open(path, 'rt', encoding="utf8")
