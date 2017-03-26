@@ -36,7 +36,9 @@ def main():
     
     filename = [name for name in os.listdir(EXTRACTED_PATH) if '.csv' in name]
     
-    
+    print(filename)
+    print(dw.extract_filename(filename[1]))
+               
     dt = dw.read_data(EXTRACTED_PATH+filename[0])
     
     #for t in dt:
