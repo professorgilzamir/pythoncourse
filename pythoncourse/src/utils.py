@@ -64,14 +64,14 @@ def create_cidcnes_index(lista):
 
 #source = lista
 #columns_index = dicionario
-#columns = tupla com nomes das colunas
-def create_index_from(source, columns_index, columns):
+#columns = tupla com nomes das colunasd
+def create_index_from(source, columns_index, *args):
     dict = {}
     i = 0
     
     for tp in source:
         key = ""
-        for cl in columns:
+        for cl in args:
             key += tp[ columns_index[cl] ]
         dict[key] = i
         i += 1
