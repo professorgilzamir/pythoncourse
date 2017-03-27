@@ -30,7 +30,11 @@ def download(response, output):
         print('Downloaded {bytes}'.format(bytes=total_downloaded))
 
 def extract_filename(filename):
-    return filename.split('.')[0];
+    return filename.split('.')
+    del filename[len(filename) - 1]
+    string = ""
+    return string.join(filename)
+
 
 def read_data(path):
     fdata = open(path, 'rt')
