@@ -50,3 +50,25 @@ def dicionario(listaLCSV):
 def pesquisa(str, dic):
     return dic[str]
 
+def create_index_from(source, cl1= '', cl2= ''):
+    dic = {}
+    
+    i1 = i2 = 0
+    
+    #print(args)
+    
+    for x in range(0, len(source[0])):
+        if(source[0][x] == cl1):
+            i1 = x
+        if(source[0][x] == cl2):
+            i2 = x
+        
+    if(i1 ==0 | i2 == 0): 
+        print ("Colunas não existem")
+        return 0
+    
+    #print(i1, i2)
+    columns_index = { cl1:i1, cl2:i2 }
+    for x in source:
+        dic['' + x[ columns_index[ cl1 ]]  + x[ columns_index[ cl2 ]] ] = x
+    return dic

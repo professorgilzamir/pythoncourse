@@ -2,6 +2,9 @@
 Created on 9 de mar de 2017
 
 @author: Gilzamir Gomes
+
+@Editor: Eu :v
+
 '''
 
 # coding: utf-8
@@ -12,14 +15,13 @@ import urllib.request as request
 import zipfile
 import utils as dw
 import os
-from src.utils import pesquisa
 
 def main():
     RESOURCE_URL = "http://repositorio.dados.gov.br/saude/unidades-saude/unidade-basica-saude/ubs.csv.zip"
     OUTPUT_PATH = "C:/Users/Alailton/Documents/saida.zip"
     EXTRACTED_PATH = "C:/Users/Alailton/Documents/" 
     if len(sys.argv) > 1:
-       RESOURCE_URL = sys.argv[1] 
+        RESOURCE_URL = sys.argv[1] 
     if len(sys.argv) > 2:
         OUTPUT_PATH = sys.argv[2]
     if len(sys.argv) > 3:
@@ -41,9 +43,17 @@ def main():
                
     dt = dw.read_data(EXTRACTED_PATH+filename[0])
     
-    dic = dw.dicionario(dt);
+    colunas = { "cl1":input('Digite o nome da coluna 1 '), "cl2":input('Digite o nome da coluna 2 ')}
     
-    print(pesquisa('2800303492', dic))
+    #print(colunas)
+    
+    dic = dw.create_index_from(dt, **colunas)
+    
+    if(dic == 0): exit()
+    
+    #dic = dw.dicionario(dt);
+    
+    print(dw.pesquisa('2800303492', dic))
     
     response.close()
     out_file.close()
