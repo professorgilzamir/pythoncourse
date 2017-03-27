@@ -1,5 +1,5 @@
 '''
-Created on 23 de mar de 2017
+Created on 27 de mar de 2017
 
 Obtém dados em arquivos da internet
 
@@ -43,20 +43,18 @@ def extract_filename(filename):
             s += "." + arquivo[x]
     return s
 
-        
-def extract_filename(filename):
-    filename = filename.split('.')
-    del filename[len(filename) - 1]
-    string = ""
-    return string.join(filename)
-
-def read_data(path):
-    fdata = open(path, 'rt', encoding="utf8")
-    data = []
-    for line in fdata:
-        linedata = line.split(',')
-        data.append(tuple(linedata))
-    fdata.close()
-    return data
-
-
+		
+def load_data(arquivo):
+		dados = open(path, 'rt', encoding="utf8")
+		
+		
+def loadlistfromcsv (path):
+	  arquivo = open(path, 'rt', encoding="utf8")
+		data = []
+		
+		for x in arquivo:
+			linedata = x.split(',')
+			data.append(tuple(linedata))
+			
+		arquivo.close()
+		return data
