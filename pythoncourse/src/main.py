@@ -45,11 +45,13 @@ def main():
     
     filename = [name for name in os.listdir(EXTRACTED_PATH) if '.csv' in name]    
     
+    
     dt = dw.loadlistfromcsv(EXTRACTED_PATH+filename[0])
-    dicio = dw.create_cidcnes_index(dt[1:])
     
-    print(dicio) 
+    #column_index = dw.create_column_index(dt[0])
     
+    dicio = dw.create_index_from(dt[:5], {'nom_estab':4, 'dsc_cidade':7}, ('nom_estab', 'dsc_cidade')) 
+    print(dicio)
     print("Finished")
 
 if __name__ == "__main__":

@@ -61,3 +61,19 @@ def create_cidcnes_index(lista):
         dict[t[2] + t[3]] = t
         
     return dict
+
+#source = lista
+#columns_index = dicionario
+#columns = tupla com nomes das colunas
+def create_index_from(source, columns_index, columns):
+    dict = {}
+    i = 0
+    
+    for tp in source:
+        key = ""
+        for cl in columns:
+            key += tp[ columns_index[cl] ]
+        dict[key] = i
+        i += 1
+    
+    return dict
