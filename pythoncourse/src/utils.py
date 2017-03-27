@@ -1,8 +1,8 @@
 '''
-Alterado on 22 de mar de 2017
+Alterado on 27 de mar de 2017
 
 Obtém dados em arquivos da internet
-O seguinte código já se encontra alterado no repositório original
+
 @author: André Oliveira
 '''
 
@@ -36,13 +36,17 @@ def extract_filename(filename):
     string = ""
     return string.join(filename)
 
-def read_data(path):
+def loadlistfromcsv(path):
     fdata = open(path, 'rt', encoding="utf8")
     data = []
     for line in fdata:
-        linedata = line.split(',')
-        data.append(tuple(linedata))
+        data.append(tuple(line.split(',')))
     fdata.close()
     return data
 
-
+def create_cidcnes_index (fdata):
+    data = {}
+    for line in fdata:
+        key = str(line[2]) + str(line[3])
+        data[key] = line
+    return data
