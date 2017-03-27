@@ -46,7 +46,6 @@ def loadlistfromcsv(path):
 
 def create_cidcnes_index (fdata):
     data = {}
-    for line in fdata:
-        key = str(line[2]) + str(line[3])
-        data[key] = line
+    for lin in fdata:
+        data[str(lin[2]) + str(lin[3])] = lin
     return data
