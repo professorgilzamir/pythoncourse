@@ -1,8 +1,8 @@
 '''
-Alterado on 22 de mar de 2017
+Alterado on 27 de mar de 2017
 
 Obtém dados em arquivos da internet
-O seguinte código já se encontra alterado no repositório original
+
 @author: André Oliveira
 '''
 
@@ -40,8 +40,7 @@ def loadlistfromcsv(path):
     fdata = open(path, 'rt', encoding="utf8")
     data = []
     for line in fdata:
-        linedata = line.split(',')
-        data.append(tuple(linedata))
+        data.append(tuple(line.split(',')))
     fdata.close()
     return data
 
