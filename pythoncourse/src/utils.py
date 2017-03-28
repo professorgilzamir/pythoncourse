@@ -19,6 +19,7 @@ def download_length(response, output, length):
         output.write(response.read(BUFF_SIZE))
         print("Downloaded %d " % (((time * BUFF_SIZE)/100.0) * 100))
 
+
 def download(response, output):
     total_downloaded = 0
     while True:
@@ -29,6 +30,7 @@ def download(response, output):
         output.write(data)
         print('Downloaded {bytes}'.format(bytes=total_downloaded))
 
+
 def extract_filename(filename):
     return filename.split('.')
     del filename[len(filename) - 1]
@@ -36,7 +38,8 @@ def extract_filename(filename):
     return string.join(filename)
 
 
-def read_data(path):
+
+def loadlistfromcsv(path):
     fdata = open(path, 'rt')
     data = []
     for line in fdata:
@@ -44,5 +47,4 @@ def read_data(path):
         data.append(tuple(linedata))
     fdata.close()
     return data
-
 
