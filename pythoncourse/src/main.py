@@ -45,6 +45,13 @@ def main():
     for t in dt:
         print(t) 
     
+    print("Finished")
+    
+    dic = dw.dicio(dt)
+    
+    for t in dic:
+        print(t) 
+    
     response.close()
     out_file.close()
     print("Finished")

@@ -40,7 +40,7 @@ def extract_filename(filename):
 
 
 def loadlistfromcsv(path):
-    fdata = open(path, 'rt')
+    fdata = open(path, 'rt', encoding="utf8")
     data = []
     for line in fdata:
         linedata = line.split(',')
@@ -48,3 +48,11 @@ def loadlistfromcsv(path):
     fdata.close()
     return data
 
+def dicio(lista):
+    data = {}
+    for line in lista:
+        index = (str(line[2]) + str(line[3]))
+        data[index] = line
+    return data
+
+        
