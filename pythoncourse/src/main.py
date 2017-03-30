@@ -40,10 +40,22 @@ def main():
     filename = [name for name in os.listdir(EXTRACTED_PATH) if '.csv' in name]
     
     
-    dt = dw.read_data(EXTRACTED_PATH+filename[0])
+    dt = dw.loadlistfromcsv(EXTRACTED_PATH+filename[0])
     
     for t in dt:
         print(t) 
+    
+    print("Finished")
+    
+    #dic = dw.dicio(dt)
+    
+    columns_index = {'cod_munic': 2, 'cod_cnes': 3, 'nome_estab': 4, 'desc_endereco': 5}
+    index = ('cod_munic', 'cod_cnes')
+    
+    dict = dw.create_index_from(dt, columns_index, index)
+    
+    for t in dict:
+        print("{0} : {1} ".format(t, dict[t])) 
     
     response.close()
     out_file.close()
