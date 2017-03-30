@@ -48,6 +48,7 @@ def loadlistfromcsv(path):
     fdata.close()
     return data
 
+
 def dicio(lista):
     data = {}
     for line in lista:
@@ -55,4 +56,34 @@ def dicio(lista):
         data[index] = line
     return data
 
+
+
+def create_index_from(source, columns_index, columns):
+    t = []
+    for i in columns:
+        for j in columns_index:
+            if i in j:
+                t.append(columns_index[i])   #pegando as chaves para saber quais colunas concatenar
+                
+    
+    data = {}
+    cont = 1
+    for line in source:
+        index = ''
+        for i in t:
+            index = str(index) + str(line[i]) #concatena todas as colunas enviadas
+        data[index] = cont
         
+        cont = cont + 1
+    
+    return data
+        
+    
+            
+                
+    
+    
+    
+    
+        
+    
