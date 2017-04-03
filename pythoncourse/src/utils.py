@@ -33,8 +33,7 @@ def download(response, output):
 def extract_filename(filename):
     filename = filename.split('.')
     del filename[len(filename) - 1]
-    string = ""
-    return string.join(filename)
+    return ".".join(filename)
 
 def loadlistfromcsv(path):
     fdata = open(path, 'rt', encoding="utf8")
@@ -51,3 +50,31 @@ def create_cidcnes_index (fdata):
         key = str(line[2]) + str(line[3])
         data[key] = line
     return data
+
+def create_index_from (source, columns_index, *args):
+    for arg in args:
+        if (columns_index.get(arg) == None):
+            return False;
+    size = len(source)
+    for column in columns_index:
+        if (column < 0 and column >= size):
+            return False
+    data = {}
+    for line in source:
+        key = ""
+        for arg in args:
+            key = key + str(line[columns_index[arg]])
+        data[key] = line
+    return data
+
+def interpret (line_from_source, columns_index, **kargs):
+    size = len(line_from_source)
+    for column in columns_index:
+        if (column < 0 and column >= size):
+            return False;
+    for karg in kargs:
+        if (kargs[karg] == 'int'):
+            line_from_source[columns_index[karg]] = int(line_from_source[columns_index[karg]])
+        else:
+            line_from_source[columns_index[karg]] = line_from_source[columns_index[karg]] 
+    return line_from_source
