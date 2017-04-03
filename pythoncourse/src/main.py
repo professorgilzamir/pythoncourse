@@ -1,6 +1,6 @@
 '''
 Created on 9 de mar de 2017
-
+Alterado em 16 de mar de 2017
 @author: Gilzamir Gomes
 '''
 
@@ -49,7 +49,10 @@ def main():
     
     dt = dw.loadlistfromcsv(EXTRACTED_PATH+filename[0])
     
-    teste = dw.create_cidcnes_index(dt)
+    dt = dw.loadlistfromcsv(EXTRACTED_PATH+filename[0])
+    
+    for t in dt:
+        print(t)
 
     print("Finished")
 
