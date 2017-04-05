@@ -51,3 +51,10 @@ def loadlistfromcsv(url):
     data.close()
     return lista
 """Fim - Questao 4"""
+"""Questao 5"""
+ def create_cidcnes_index(lista):
+    dic = {}
+    for linha in lista:
+        dic[lista[2]+lista[3]] = linha
+    return dic
+"""Questao 5"""
