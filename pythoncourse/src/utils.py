@@ -42,13 +42,12 @@ def extract_filename(filename):
     return name_aux
 """Fim - Questao 2"""
 
-def read_data(path):
-    fdata = open(path, 'rt', encoding="utf8")
-    data = []
-    for line in fdata:
-        linedata = line.split(',')
-        data.append(tuple(linedata))
-    fdata.close()
-    return data
-
-
+"""Questao 5"""
+def loadlistfromcsv(url):
+    data = open(url, 'rt', encoding="utf8")
+    lista = []
+    for linha in data.readlines():
+        lista.append(tuple(linha.split(','))
+    data.close()
+    return lista
+"""Fim - Questao 5"""
