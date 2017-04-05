@@ -42,13 +42,19 @@ def extract_filename(filename):
     return name_aux
 """Fim - Questao 2"""
 
-def read_data(path):
-    fdata = open(path, 'rt', encoding="utf8")
-    data = []
-    for line in fdata:
-        linedata = line.split(',')
-        data.append(tuple(linedata))
-    fdata.close()
-    return data
-
-
+"""Questao 4"""
+def loadlistfromcsv(url):
+    data = open(url, 'rt', encoding="utf8")
+    lista = []
+    for linha in data.readlines():
+        lista.append(tuple(linha.split(','))
+    data.close()
+    return lista
+"""Fim - Questao 4"""
+"""Questao 5"""
+ def create_cidcnes_index(lista):
+    dic = {}
+    for linha in lista:
+        dic[lista[2]+lista[3]] = linha
+    return dic
+"""Questao 5"""
