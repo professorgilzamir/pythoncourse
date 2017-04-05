@@ -30,11 +30,17 @@ def download(response, output):
         output.write(data)
         print('Downloaded {bytes}'.format(bytes=total_downloaded))
 
+"""Questao 2"""
 def extract_filename(filename):
-    filename = filename.split('.')
-    del filename[len(filename) - 1]
-    string = ""
-    return string.join(filename)
+    name = filename.split('.')
+    name_aux = ""
+    for i in range(0,len(name) - 1):
+        if i == 0:
+            name_aux = name[0]
+        else:
+            name_aux = name_aux + "." + name[i]
+    return name_aux
+"""Fim - Questao 2"""
 
 def read_data(path):
     fdata = open(path, 'rt', encoding="utf8")
