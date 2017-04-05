@@ -64,7 +64,7 @@ def create_cidcnes_index(lista):
 
 #source = lista
 #columns_index = dicionario
-#columns = tupla com nomes das colunasd
+#columns = tupla com nomes das colunas
 def create_index_from(source, columns_index, *args):
     dict = {}
     i = 0
@@ -77,3 +77,14 @@ def create_index_from(source, columns_index, *args):
         i += 1
     
     return dict
+
+#line_from_source = lista de tuplas
+#columns_index = dicionario
+#**kargs = conj de pares chave=valor
+def interpret(line_from_source, columns_index, **kargs):
+    for par in kargs:
+        if (kargs[par] == 'int'):
+            line_from_source[ columns_index[par] ] = int( line_from_source[ columns_index[par] ] )
+             
+    return line_from_source
+    
