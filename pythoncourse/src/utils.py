@@ -42,7 +42,7 @@ def extract_filename(filename):
     return name_aux
 """Fim - Questao 2"""
 
-"""Questao 5"""
+"""Questao 4"""
 def loadlistfromcsv(url):
     data = open(url, 'rt', encoding="utf8")
     lista = []
@@ -50,4 +50,4 @@ def loadlistfromcsv(url):
         lista.append(tuple(linha.split(','))
     data.close()
     return lista
-"""Fim - Questao 5"""
+"""Fim - Questao 4"""
