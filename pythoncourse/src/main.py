@@ -21,7 +21,7 @@ def main():
         EXTRACTED_PATH = os.path.expanduser("~\\")
     else:
         OUTPUT_PATH = os.path.expanduser("~/saida.zip")
-        EXTRACTED_PATH = os.path.expanduser("~/")
+        EXTRACTED_PATH = os.path.expanduser("~/")        
 
     if len(sys.argv) > 1:
         RESOURCE_URL = sys.argv[1] 
@@ -47,12 +47,13 @@ def main():
     
     filename = [name for name in os.listdir(EXTRACTED_PATH) if '.csv' in name]
     
+    dt = dw.loadlistfromcsv(EXTRACTED_PATH+filename[0])
     
     dt = dw.loadlistfromcsv(EXTRACTED_PATH+filename[0])
     
     for t in dt:
-        print(t) 
-    
+        print(t)
+
     print("Finished")
 
 if __name__ == "__main__":
