@@ -58,3 +58,16 @@ def loadlistfromcsv(url):
         dic[lista[2]+lista[3]] = linha
     return dic
 """Questao 5"""
+                     
+                     
+"""Questao 1 - lista 3"""
+"""
+def create_index_from(source, columns_index, columns):
+  dic_final = {}
+  for i in source :
+    aux = ""
+    for j in columns :
+      aux = aux + i[columns_index[j]]
+    dic_final[aux] = i
+  return dic_final"""
+"""Fim - Questao 1 - lista 3"""
