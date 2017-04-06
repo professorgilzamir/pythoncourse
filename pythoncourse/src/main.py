@@ -17,10 +17,10 @@ def main():
     RESOURCE_URL = "http://repositorio.dados.gov.br/saude/unidades-saude/unidade-basica-saude/ubs.csv.zip"
 
     if os == "Windows":
-        OUTPUT_PATH = os.path.expanduser("~\saida.zip")
+        OUTPUT_PATH = os.path.expanduser("saida.zip")
         EXTRACTED_PATH = os.path.expanduser("~\\")
     else:
-        OUTPUT_PATH = os.path.expanduser("~/saida.zip")
+        OUTPUT_PATH = os.path.expanduser("saida.zip")
         EXTRACTED_PATH = os.path.expanduser("~/")
 
     if len(sys.argv) > 1:
