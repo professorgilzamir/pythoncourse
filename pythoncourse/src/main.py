@@ -48,12 +48,14 @@ def main():
     filename = [name for name in os.listdir(EXTRACTED_PATH) if '.csv' in name]
     
     
-    dt = dw.loadlistfromcsv(EXTRACTED_PATH+filename[0])
+    #dt = dw.loadlistfromcsv(EXTRACTED_PATH+filename[0])
     
-    for t in dt:
-        print(t) 
+   #for t in dt:
+    #    print(t) 
     
-    print("Finished")
+    #print("Finished")
+
+    print(dw.extract_filename('cavalo.de.troia.ua'))
 
 if __name__ == "__main__":
     main()
