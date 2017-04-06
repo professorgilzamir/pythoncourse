@@ -1,10 +1,7 @@
 '''
-Created on 27 de mar de 2017
-
+Created on 23 de mar de 2017
 Obtém dados em arquivos da internet
-
 @author: Gilzamir (gilzamir@outlook.com)
-
 modificado por Luis Costa
 '''
 
@@ -58,3 +55,10 @@ def loadlistfromcsv (path):
 			
 		arquivo.close()
 		return data
+		
+def create_cidcnes_index (data):
+	dic = {}
+	for linha in data:
+		dic[linha[2] + linha[3]] = linha
+		
+	return dic
