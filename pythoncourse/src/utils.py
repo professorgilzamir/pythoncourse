@@ -62,3 +62,15 @@ def create_cidcnes_index (data):
 		dic[linha[2] + linha[3]] = linha
 		
 	return dic
+""" questao 1 lista 3"""
+def create_index_from(source, columns_index, columns):
+	dic = {}	
+	
+	for i in source:
+		s = ""
+		for j in columns:
+			s += i[column_index[j]]
+		dic[s] = i
+
+	return dic		
+""" fim questao 1 lista 3"""
