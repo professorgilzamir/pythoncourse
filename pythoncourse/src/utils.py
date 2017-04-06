@@ -49,5 +49,25 @@ def loadlistfromcsv(path):
     fdata.close()
     return data
 
+def create_cidcnes_index(data):
+    dicionario = {}
+    for data in data:
+        dic[data[2]+data[3]] = data
+    return dicionario
+
+def create_index_from(source, columns_index, columns):
+   dicionario_acessado = {}
+   for i in source :
+     a = ""
+     for j in columns :
+       a = a + i[columns_index[j]]
+     dicionario_acessado[a] = i
+    return dicionario_acessado
+  
+def interpret(line_from_source, columns_index, **kargs):
+  for i, j in kargs:
+      if j == "int":
+        line_from_source[i] = int(line_from_source[i])
+  return line_from_source
 
 
