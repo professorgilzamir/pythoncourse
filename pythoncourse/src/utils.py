@@ -1,5 +1,5 @@
 '''
-Created on 23 de mar de 2017
+Created on 05 de abr de 2017
 Obtém dados em arquivos da internet
 @author: Gilzamir (gilzamir@outlook.com)
 modificado por Luis Costa
@@ -62,3 +62,25 @@ def create_cidcnes_index (data):
 		dic[linha[2] + linha[3]] = linha
 		
 	return dic
+""" questao 1 lista 3"""
+def create_index_from(source, columns_index, columns):
+	dic = {}	
+	
+	for i in source:
+		s = ""
+		for j in columns:
+			s += i[column_index[j]]
+		dic[s] = i
+
+	return dic		
+""" fim questao 1 lista 3"""
+
+
+""" questao 3 lista 3"""
+def interpret(line_from_source, columns_index, **kargs):
+	for i, j in kargs:
+		if j == "int":
+			line_from_source[columns_index[i]] = int(line_from_source[columns_index[i]])
+
+	return line_from_source
+""" fim questao 3 lista 3"""
