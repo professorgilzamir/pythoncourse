@@ -10,7 +10,7 @@ import io
 import sys
 import urllib.request as request
 import zipfile
-import utils as dw
+import utils as dy
 import os
 
 def main():
@@ -35,14 +35,13 @@ def main():
     filename = [name for name in os.listdir(EXTRACTED_PATH) if '.csv' in name]
     
     
-    dt = dw.read_data(EXTRACTED_PATH+filename[0])
+    dx = dy.loadlistfromcsv(EXTRACTED_PATH+filename[0])
     
-    for t in dt:
-        print(t) 
+    for x in dx:
+        print(x) 
     
-    response.close()
-    out_file.close()
     print("Finished")
 
 if __name__ == "__main__":
     main()
+
