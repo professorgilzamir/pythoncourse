@@ -31,11 +31,16 @@ def download(response, output):
         print('Downloaded {bytes}'.format(bytes=total_downloaded))
 
 def extract_filename(filename):
-    filename = filename.split('.')
-    del filename[len(filename) - 1]
-    return '.'.join(filename)
+    arquivo = filename.split('.') 
+    palavra = ""
+    for x in range(0, len(arquivo) - 1):
+        if (x == 0):
+            palavra += arquivo[x]
+        else :
+            palavra += "." + arquivo[x]
+    return palavra
 
-def read_data(path):
+def loadlistfromcsv(path):
     fdata = open(path, 'rt', encoding="utf8")
     data = []
     for line in fdata:
@@ -44,4 +49,23 @@ def read_data(path):
     fdata.close()
     return data
 
+def create_cidcnes_index(data):
+    dicionario = {}
+    for data in data:
+        dicionario[data[2]+data[3]] = data
+    return dicionario
 
+def create_index_from(source, columns_index, columns):
+  dicionario_acessado = {}
+  for i in source :
+    a = ""
+    for j in columns :
+      a = a + i[columns_index[j]]
+    dicionario_acessado[a] = i
+  return dicionario_acessado
+  
+def interpret(line_from_source, columns_index, **kargs):
+  for i, j in kargs:
+      if j == "int":
+        line_from_source[i] = int(line_from_source[i])
+  return line_from_source
