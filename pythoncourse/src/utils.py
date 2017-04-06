@@ -52,7 +52,7 @@ def loadlistfromcsv(path):
 def create_cidcnes_index(data):
     dicionario = {}
     for data in data:
-        dic[data[2]+data[3]] = data
+        dicionario[data[2]+data[3]] = data
     return dicionario
 
 def create_index_from(source, columns_index, columns):
