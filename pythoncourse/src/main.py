@@ -26,8 +26,11 @@ def main():
         EXTRACTION_PATH = sys.argv[3]
     
     dt = dw.loadlistfromcsv(RESOURCE_URL, OUTPUT_PATH, EXTRACTION_PATH)
-    index = dw.create_cidcnes_index(dt)
-    print(index["3305402294877"]);
+    index = dw.create_index_from(dt, {'nom_stab':4})   
+
+    line = index["POSTO DE SAUDE DE ANTA"];
+    
+    print(line)
     print("Finished")
 
 if __name__ == "__main__":

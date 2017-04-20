@@ -77,4 +77,21 @@ def create_cidcnes_index(list):
         db[cidval+cnesval] = line
     return db;
 
+def create_index_from(source, col_index):
+    db = {}
+    for line in source:
+        index = ""
+        for  col in col_index:
+            index += line[col_index[col]]
+        db[index] = line
+    return db;
+
+def interpret(line_from_source, col_index, **kargs):
+    line = []
+    for key in kargs:
+        idx = col_index[key]
+        coltype = kargs[key]
+        line.append(coltype(line_from_source[idx]))
+    return line
+
 
