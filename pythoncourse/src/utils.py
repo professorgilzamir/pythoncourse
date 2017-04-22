@@ -12,6 +12,10 @@ import urllib.request as request
 import zipfile
 import io
 import os
+import re
+from src.Endereco import Endereco
+from src.UnidadeDeSaude import UnidadeDeSaude
+from src.NumeroTelefoneInvalido import NumeroTelefoneInvalido
 
 
 BUFF_SIZE = 1024
@@ -43,10 +47,18 @@ def read_data(path):
     fdata = open(path, 'rt', encoding="utf8")
     data = []
     for line in fdata:
-        linedata = line.split(',')
-        data.append(tuple(linedata))
+        ld = line.split(',')
+        
+        ender = Endereco(ld[5], ld[6], ld[7], ld[8])
+        unit_health = UnidadeDeSaude(ld[0], ld[1], ld[2], ld[3], ld[9], ld[10], ld[11], ender)
+        
+        data.append(unit_health)
     fdata.close()
     return data
+
+def validarTelefone(telefone):
+    if not re.match('\(\d{2}\)\d{8,9}$', telefone):
+        raise NumeroTelefoneInvalido(1)
 
 def loadlistfromcsv(URL, OUTPUT_PATH="./dt.zip", EXTRACTION_PATH="./"):
     response = request.urlopen(URL)
@@ -61,28 +73,27 @@ def loadlistfromcsv(URL, OUTPUT_PATH="./dt.zip", EXTRACTION_PATH="./"):
     zfile = zipfile.ZipFile(OUTPUT_PATH)
     zfile.extractall(EXTRACTION_PATH)
     filename = [name for name in os.listdir(EXTRACTION_PATH) if '.csv' in name]
-    dt =  read_data(EXTRACTION_PATH+filename[0])
+    dt = read_data(EXTRACTION_PATH+filename[0])
     response.close()
     out_file.close()
     return dt
 
 def create_cidcnes_index(list):
-    cididx = 2
-    cnesidx = 3
     db = {}
-    for line in list:
-        cidval = line[cididx]
-        cnesval = line[cnesidx]
-        db[cidval+cnesval] = line
+    for obj in list:
+        cidval = obj.magicGet('codCid')
+        cnesval = obj.magicGet('codCnes')
+        print(type(obj))
+        db[cidval+cnesval] = obj
     return db;
 
 def create_index_from(source, col_index):
     db = {}
-    for line in source:
+    for obj in source:
         index = ""
-        for  col in col_index:
-            index += line[col_index[col]]
-        db[index] = line
+        for key in col_index:
+            index += obj.magicGet(key)
+        db[index] = obj
     return db;
 
 def interpret(line_from_source, col_index, **kargs):
@@ -92,5 +103,3 @@ def interpret(line_from_source, col_index, **kargs):
         coltype = kargs[key]
         line.append(coltype(line_from_source[idx]))
     return line
-
-
