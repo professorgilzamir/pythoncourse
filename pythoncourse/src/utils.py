@@ -8,7 +8,11 @@ Obtém dados em arquivos da internet
 
 #coding: utf-8
 
-import string
+import urllib.request as request
+import zipfile
+import io
+import os
+
 
 BUFF_SIZE = 1024
 
@@ -33,8 +37,7 @@ def download(response, output):
 def loadlistfromcsv(filename):
     filename = filename.split('.')
     del filename[len(filename) - 1]
-    string = ""
-    return string.join(filename)
+    return '.'.join(filename)
 
 def read_data(path):
     fdata = open(path, 'rt', encoding="utf8")
@@ -44,5 +47,50 @@ def read_data(path):
         data.append(tuple(linedata))
     fdata.close()
     return data
+
+def loadlistfromcsv(URL, OUTPUT_PATH="./dt.zip", EXTRACTION_PATH="./"):
+    response = request.urlopen(URL)
+    content_length = response.getheader('Content-Length')
+    out_file = io.FileIO(OUTPUT_PATH, mode="w")    
+
+    if content_length:
+        length = int(content_length)
+        download_length(response, out_file, length)
+    else:
+        download(response, out_file)
+    zfile = zipfile.ZipFile(OUTPUT_PATH)
+    zfile.extractall(EXTRACTION_PATH)
+    filename = [name for name in os.listdir(EXTRACTION_PATH) if '.csv' in name]
+    dt =  read_data(EXTRACTION_PATH+filename[0])
+    response.close()
+    out_file.close()
+    return dt
+
+def create_cidcnes_index(list):
+    cididx = 2
+    cnesidx = 3
+    db = {}
+    for line in list:
+        cidval = line[cididx]
+        cnesval = line[cnesidx]
+        db[cidval+cnesval] = line
+    return db;
+
+def create_index_from(source, col_index):
+    db = {}
+    for line in source:
+        index = ""
+        for  col in col_index:
+            index += line[col_index[col]]
+        db[index] = line
+    return db;
+
+def interpret(line_from_source, col_index, **kargs):
+    line = []
+    for key in kargs:
+        idx = col_index[key]
+        coltype = kargs[key]
+        line.append(coltype(line_from_source[idx]))
+    return line
 
 
