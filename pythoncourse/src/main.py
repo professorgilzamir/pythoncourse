@@ -13,6 +13,9 @@ import zipfile
 import utils as dw
 import os
 
+from src.NumeroTelefoneInvalido import NumeroTelefoneInvalido
+from src.utils import validarTelefone
+
 def main():
     RESOURCE_URL = "http://repositorio.dados.gov.br/saude/unidades-saude/unidade-basica-saude/ubs.csv.zip"
     OUTPUT_PATH = "./dt.zip";

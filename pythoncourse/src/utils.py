@@ -12,6 +12,11 @@ import urllib.request as request
 import zipfile
 import io
 import os
+import re
+
+from src.Endereco import Endereco
+from src.UnidadeDeSaude import UnidadeDeSaude
+from src.NumeroTelefoneInvalido import NumeroTelefoneInvalido
 
 
 BUFF_SIZE = 1024
@@ -40,13 +45,17 @@ def loadlistfromcsv(filename):
     return '.'.join(filename)
 
 def read_data(path):
-    fdata = open(path, 'rt', encoding="utf8")
-    data = []
-    for line in fdata:
-        linedata = line.split(',')
-        data.append(tuple(linedata))
-    fdata.close()
-    return data
+  fdata = open(path, 'rt', encoding="utf8")
+
+  data = []
+  for line in fdata:
+    atrib = line.split(',')
+    address = Endereco(atrib[5], atrib[6], atrib[7], atrib[8])
+    unit_health = UnidadeDeSaude(atrib[0], atrib[1], atrib[2], atrib[3], atrib[9], atrib[10], atrib[11], address)
+    data.append(unit_health)
+
+  fdata.close()
+  return data
 
 def loadlistfromcsv(URL, OUTPUT_PATH="./dt.zip", EXTRACTION_PATH="./"):
     response = request.urlopen(URL)
@@ -67,22 +76,22 @@ def loadlistfromcsv(URL, OUTPUT_PATH="./dt.zip", EXTRACTION_PATH="./"):
     return dt
 
 def create_cidcnes_index(list):
-    cididx = 2
-    cnesidx = 3
     db = {}
-    for line in list:
-        cidval = line[cididx]
-        cnesval = line[cnesidx]
-        db[cidval+cnesval] = line
+
+    for obj in list:
+        cidval = obj.magicGet('codCid')
+        cnesval = obj.magicGet('codCnes')
+        db[cidval+cnesval] = obj
     return db;
 
 def create_index_from(source, col_index):
     db = {}
-    for line in source:
+
+    for obj in source:
         index = ""
-        for  col in col_index:
-            index += line[col_index[col]]
-        db[index] = line
+        for  atrib in col_index:
+            index += obj.magicGet(key)
+        db[index] = obj
     return db;
 
 def interpret(line_from_source, col_index, **kargs):
@@ -93,4 +102,6 @@ def interpret(line_from_source, col_index, **kargs):
         line.append(coltype(line_from_source[idx]))
     return line
 
-
+def validarTelefone(phone):
+  if not re.match('\(\d{2}\)\d{8,9}$', phone):
+    raise NumeroTelefoneInvalido(1)
