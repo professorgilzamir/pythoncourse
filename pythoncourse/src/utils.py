@@ -35,6 +35,10 @@ def download(response, output):
         output.write(data)
         print('Downloaded {bytes}'.format(bytes=total_downloaded))
 
+
+'''
+Apenas testando..
+'''
 def extract_filename(filename):
     filename = filename.split('.')
     del filename[len(filename) - 1]
