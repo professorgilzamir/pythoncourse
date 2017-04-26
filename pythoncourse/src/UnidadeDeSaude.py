@@ -11,40 +11,50 @@ class UnidadeDeSaude (LocalizacaoGeografica):
     self._sitEquipamentos = sitEquipamentos
     self._endereco = endereco
 
-  def magicGet (self, atrib):
-    if atrib == 'latitude':
-      return self._latitude
-    elif atrib == 'longitude':
-      return self._longitude
-    elif atrib == 'codCid':
-      return self._codCid
-    elif atrib == 'codCnes':
-      return self._codCnes
-    elif atrib == 'dscEstFisAmb':
-      return self._dscEstFisAmb
-    elif atrib == 'dscAdapFisldo':
-      return self._dscAdapFisldo
-    elif atrib == 'sitEquipamentos':
-      return self._sitEquipamentos
-    elif atrib == 'endereco':
-      return self._endereco
-    else:
-      return None
+  def getLatitude (self):
+    return self._latitude
 
-  def magicSet (self, atrib, value):
-    if atrib == 'latitude':
-      self._latitude = value
-    elif atrib == 'longitude':
-      self._longitude = value
-    elif atrib == 'codCid':
-      self._codCid = value
-    elif atrib == 'codCnes':
-      self._codCnes = value
-    elif atrib == 'dscEstFisAmb':
-      self._dscEstFisAmb = value
-    elif atrib == 'dscAdapFisldo':
-      self._dscAdapFisldo = value
-    elif atrib == 'sitEquipamentos':
-      self._sitEquipamentos = value
-    elif atrib == 'endereco':
-      self._endereco = value
+  def getLongitude (self):
+    return self._longitude
+
+  def getCodCid (self):
+    return self._codCid
+
+  def getCodCnes (self):
+    return self._codCnes
+
+  def getDscEstFisAmb (self):
+    return self._dscEstFisAmb
+
+  def getDscAdapFisldo (self):
+    return self._dscAdapFisldo
+
+  def getSitEquipamentos (self):
+    return self._sitEquipamentos
+
+  def getEndereco (self):
+    return self._endereco
+
+  def setLatitude (self, value):
+    self._latitude = value
+
+  def setLongitude (self, value):
+    self._longitude = value
+
+  def setCodCid (self, value):
+    self._codCid = value
+
+  def setCodCnes (self, value):
+    self._codCnes = value
+
+  def setDscEstFisAmb (self, value):
+    self._dscEstFisAmb = value
+
+  def setDscAdapFisldo (self, value):
+    self._dscAdapFisldo = value
+
+  def setSitEquipamentos (self, value):
+    self._sitEquipamentos = value
+
+  def setEndereco (self, value):
+    self._endereco = value

@@ -1,19 +1,17 @@
 class NumeroTelefoneInvalido(Exception):
 
-  def __init__(self, numero, mensagem = "Numerx'o de telefone invalido"):
+  def __init__(self, numero, mensagem = "Numero de telefone invalido"):
     self._numero = numero
     self._mensagem = mensagem
 
-  def magicGet(self, atrib):
-    if atrib == 'numero':
-      return self._numero
-    elif atrib == 'mensagem':
-      return self._mensagem
-    else:
-      return None
+  def getNumero (self):
+    return self._numero
 
-  def magicSet(self, atrib, value):
-    if atrib == 'numero'
-      self._numero = value
-    elif atrib == 'mensagem'
-      self._mensagem = value
+  def getMensagem (self):
+    return self._mensagem
+
+  def setNumero (self, value):
+    self._numero = value
+
+  def setMensagem (self, value):
+    self._mensagem = value

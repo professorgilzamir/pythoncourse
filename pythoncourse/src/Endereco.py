@@ -6,24 +6,26 @@ class Endereco:
     self._cidade = cidade
     self._telefone = telefone
 
-  def magicGet (self, atrib):
-    if atrib == 'logradouro':
-      return self._logradouro
-    elif atrib == 'bairro':
-      return self._bairro
-    elif atrib == 'cidade':
-      return self._cidade
-    elif atrib == 'telefone':
-      return self._telefone
-    else:
-      return None
+  def getLogradouro (self):
+    return self._logradouro
 
-  def magicSet (self, atrib, value):
-    if atrib == 'logradouro':
-      self._logradouro = value
-    elif atrib == 'bairro':
-      self._bairro = value
-    elif atrib == 'cidade':
-      self._cidade = value
-    elif atrib == 'telefone':
-      self._telefone = value
+  def getBairro (self):
+    return self._bairro
+
+  def getCidade (self):
+    return self._cidade
+
+  def getTelefone (self):
+    return self._telefone
+
+  def setLogradouro (self, value):
+    self._logradouro = value
+
+  def setBairro (self, value):
+    self._bairro = value
+
+  def setCidade (self, value):
+    self._cidade = value
+
+  def setTelefone (self, value):
+    self._telefone = value

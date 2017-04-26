@@ -1,5 +1,7 @@
 
 '''
+sétima questão
+
 referencia do calculo da distancia usado na função Dist
 http://carlosdelfino.eti.br/cursoarduino/geoprocessamento/calculando-distancias-com-base-em-coordenadas-de-gps/
 
@@ -8,17 +10,14 @@ a função menorDistancia iria retornar uma lista ordenada de distancia
 funcionando... pode ser adaptada para retornar o que for preciso, como a LocalizacaoGeografia ou um objeto referente a unidade de saude
 '''
 
-def menorDistancia (locationReferencia, locations):
+def menorDistancia (unit_health_ref, unit_health):
   dist = [];
 
-  for location in locations:
-    dist.append(dist(locationReferencia, location))
+  for unit in unit_health:
+    DLA = abs(unit_health_ref.getLatitude() - unit.getLatitude());
+    DLO = abs(unit_health_ref.getLongitude() - unit.getLongitude());
+    DT = sqrt((DLA * 1.852)^2 + (DLO * 1.852)^2);
+    if (DT > 0):
+      dist.append(DT)
 
   return dist.sort()
-
-def dist (location1, location2):
-
-  DLA = abs(location1.magicGet("latitude") - location2.magicGet("latitude"));
-  DLO = abs(location1.magicGet("longitude") - location2.magicGet("longitude"));
-
-  return sqrt((DLA * 1.852)^2 + (DLO * 1.852)^2);

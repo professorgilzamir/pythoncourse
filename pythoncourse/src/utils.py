@@ -79,8 +79,8 @@ def create_cidcnes_index(list):
     db = {}
 
     for obj in list:
-        cidval = obj.magicGet('codCid')
-        cnesval = obj.magicGet('codCnes')
+        cidval = obj.getCodCid()
+        cnesval = obj.gtCodCnes()
         db[cidval+cnesval] = obj
     return db
 
@@ -89,9 +89,30 @@ def create_index_from(source, col_index):
 
     for obj in source:
         index = ""
+<<<<<<< HEAD
+        for atrib in col_index:
+          if atrib == 'latitude':
+            index += obj.getLatitude()
+          elif atrib == 'longitude':
+            index += obj.getLongitude()
+          elif atrib == 'codCid':
+            index += obj.getCodCid()
+          elif atrib == 'codCnes':
+            index += obj.getCodCnes()
+          elif atrib == 'dscEstFisAmb':
+            index += obj.getDscEstFisAmb()
+          elif atrib == 'dscAdapFisldo':
+            index += obj.getDscAdapFisldo()
+          elif atrib == 'sitEquipamentos':
+            index += obj.getSitEquipamentos()
+          elif atrib == 'endereco':
+            index += obj.getEndereco()
+
+=======
 
         for  atrib in col_index:
             index += obj.magicGet(key)
+>>>>>>> 11ddf3cd3110e0ee3de04c5b2517a57a84b3af6a
         db[index] = obj
     return db
 
@@ -106,3 +127,15 @@ def interpret(line_from_source, col_index, **kargs):
 def validarTelefone(phone):
   if not re.match('\(\d{2}\)\d{8,9}$', phone):
     raise NumeroTelefoneInvalido(1)
+
+def menorDistancia (unit_health_ref, unit_health):
+  dist = [];
+
+  for unit in unit_health:
+    DLA = abs(unit_health_ref.getLatitude() - unit.getLatitude());
+    DLO = abs(unit_health_ref.getLongitude() - unit.getLongitude());
+    DT = sqrt((DLA * 1.852)^2 + (DLO * 1.852)^2);
+    if (DT > 0):
+      dist.append(DT)
+
+  return dist.sort()

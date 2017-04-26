@@ -4,16 +4,14 @@ class LocalizacaoGeografica:
     self._latidude = latitude
     self._longitude = longitude
 
-  def magicGet(self, atrib):
-    if atrib == 'latitude':
-      return self._latidude
-    elif atrib == 'longitude':
-      return self._longitude
-    else:
-      return None
+  def getLatitude (self):
+    return self._latitude
 
-  def magicSet(self, atrib, value):
-    if atrib == 'latitude':
-      self._latitude = value
-    elif atrib == 'longitude':
-      self._longitude = value
+  def getLongitude (self):
+    return self._longitude
+
+  def setLatitude (self, value):
+    self._latitude = value
+
+  def setLongitude (self, value):
+    self._longitude = value
