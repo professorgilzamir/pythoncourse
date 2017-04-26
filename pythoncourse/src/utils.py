@@ -89,7 +89,7 @@ def create_index_from(source, col_index):
 
     for obj in source:
         index = ""
-<<<<<<< HEAD
+
         for atrib in col_index:
           if atrib == 'latitude':
             index += obj.getLatitude()
