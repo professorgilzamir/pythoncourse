@@ -108,11 +108,6 @@ def create_index_from(source, col_index):
           elif atrib == 'endereco':
             index += obj.getEndereco()
 
-=======
-
-        for  atrib in col_index:
-            index += obj.magicGet(key)
->>>>>>> 11ddf3cd3110e0ee3de04c5b2517a57a84b3af6a
         db[index] = obj
     return db
 
