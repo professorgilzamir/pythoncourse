@@ -1,3 +1,5 @@
+import re
+
 class LocalizacaoGeografica():
     def __init__(self, latitude, longitude):
         self._latitude = latitude
@@ -88,7 +90,8 @@ class Endereco():
         self._telefone = telefone
         
     def validar_telefone(self, telefone):
-        pass
+        fone = re.compile('(d{2}) d{4,5}-d{4}')
+        return fone.match(telefone)
 
     logadouro = property(_get_logadouro, _set_logadouro)
     bairro = property(_get_bairro, _set_bairro)
