@@ -1,4 +1,72 @@
-class UnidadeDeSaude():
+class LocalizacaoGeografica:
+	def __init__(self, latitude, longitude):
+		self._latidude = latitude
+		self._longitude = longitude
+
+	def magicGet(self, atrib):
+		if atrib == 'latitude':
+			return self._latidude
+		elif atrib == 'longitude':
+			return self._longitude
+		else:
+			return None
+
+	def magicSet(self, atrib, value):
+		if atrib == 'latitude':
+			self._latitude = value
+		elif atrib == 'longitude':
+			self._longitude = value
+
+class UnidadeDeSaude(LocalizacaoGeografica):
+	def __init__(self, latitude, longitude, codCid, codCnes, dscEstFisAmb, dscAdapFisldo, sitEquipamentos, endereco):
+		super().__init__(latitude, longitude)
+		self._dscEstFisAmb = dscEstFisAmb
+		self._dscAdapFisldo = dscAdapFisldo
+		self._sitEquipamentos = sitEquipamentos
+		self._endereco = endereco
+		self._codCid = codCid
+		self._codCnes = codCnes
+
+	def magicGet(self, atrib):
+		if atrib == 'latitude':
+			return self._latitude
+		elif atrib == 'longitude':
+			return self._longitude
+		elif atrib == 'codCid':
+			return self._codCid
+		elif atrib == 'codCnes':
+			return self._codCnes
+		elif atrib == 'dscEstFisAmb':
+			return self._dscEstFisAmb
+		elif atrib == 'dscAdapFisldo':
+			return self._dscAdapFisldo
+		elif atrib == 'sitEquipamentos':
+			return self._sitEquipamentos
+		elif atrib == 'endereco':
+			return self._endereco
+		else:
+			return None
+
+	def magicSet(self, atrib, value):
+		if atrib == 'latitude':
+			self._latitude = value
+		elif atrib == 'longitude':
+			self._longitude = value
+		elif atrib == 'codCid':
+			self._codCid = value
+		elif atrib == 'codCnes':
+			self._codCnes = value
+		elif atrib == 'dscEstFisAmb':
+			self._dscEstFisAmb = value
+		elif atrib == 'dscAdapFisldo':
+			self._dscAdapFisldo = value
+		elif atrib == 'sitEquipamentos':
+			self._sitEquipamentos = value
+		elif atrib == 'endereco':
+			self._endereco = value
+
+
+class UnidadeDeSaude(LocalizacaoGeografica):
 	def __init__(self, latitude, longitude, codCid, codCnes, dscEstFisAmb, dscAdapFisldo, sitEquipamentos, endereco):
 		super().__init__(latitude, longitude)
 		self._codCid = codCid
@@ -8,99 +76,59 @@ class UnidadeDeSaude():
 		self._sitEquipamentos = sitEquipamentos
 		self._endereco = endereco
 
-	def setLatitude(self, latitude):
-		self.latitude = latitude
+	def magicGet(self, atrib):
+		if atrib == 'latitude':
+			return self._latitude
+		elif atrib == 'longitude':
+			return self._longitude
+		elif atrib == 'codCid':
+			return self._codCid
+		elif atrib == 'codCnes':
+			return self._codCnes
+		elif atrib == 'dscEstFisAmb':
+			return self._dscEstFisAmb
+		elif atrib == 'dscAdapFisldo':
+			return self._dscAdapFisldo
+		elif atrib == 'sitEquipamentos':
+			return self._sitEquipamentos
+		elif atrib == 'endereco':
+			return self._endereco
+		else:
+			return None
 
-	def setLongitude(self, longitude):
-		self.longitude = longitude
+	def magicSet(self, atrib, value):
+		if atrib == 'latitude':
+			self._latitude = value
+		elif atrib == 'longitude':
+			self._longitude = value
+		elif atrib == 'codCid':
+			self._codCid = value
+		elif atrib == 'codCnes':
+			self._codCnes = value
+		elif atrib == 'dscEstFisAmb':
+			self._dscEstFisAmb = value
+		elif atrib == 'dscAdapFisldo':
+			self._dscAdapFisldo = value
+		elif atrib == 'sitEquipamentos':
+			self._sitEquipamentos = value
+		elif atrib == 'endereco':
+			self._endereco = value
 
-	def setCodCid(self, codCid):
-		self.codCid = codCid
+class NumeroTelefoneInvalido(Exception):
+	def __init__(self, numero, mensagem = "Numero de telefone invalido"):
+		self._numero = numero
+		self._mensagem = mensagem
 
-	def setCodCnes(self, codCnes):
-		self.codCnes = codCnes
+	def magicGet(self, atrib):
+		if atrib == 'numero':
+			return self._numero	
+		elif atrib == 'mensagem':
+			return self._mensagem
+		else:
+			return None
 
-	def setDscEstFisAmb(self, dscEstFisAmb):
-		self.dscEstFisAmb = dscEstFisAmb
-
-	def setDscAdapFisldo(self, dscAdapFisldo):
-		self.dscAdapFisldo = dscAdapFisldo
-
-	def setSitEquipamentos(self, sitEquipamentos):
-		self.sitEquipamentos = sitEquipamentos
-
-	def setEndereco(self, endereco):
-		self.endereco = endereco
-
-
-	def getLatitude(self, latitude):
-		return self.latitude
-
-	def getLongitude(self, longitude):
-		return self.longitude
-
-	def getCodCid(self, codCid):
-		return self.codCid
-
-	def getCodCnes(self, codCnes):
-		return self.codCnes
-
-	def getDscEstFisAmb(self, dscEstFisAmb):
-		return self.dscEstFisAmb
-
-	def getDscAdapFisldo(self, dscAdapFisldo):
-		return self.dscAdapFisldo
-
-	def getSitEquipamentos(self, sitEquipamentos):
-		return self.sitEquipamentos
-
-	def getEndereco(self, endereco):
-		return self.endereco
-
-class LocalizacaoGeografica():
-	def __init__(self, latitude, longitude):
-		self.latitude = latitude
-		self.longitude = longitude
-
-	def setLatitude(self, latitude):
-		self.latitude = latitude
-
-	def setLongitude(self, longitude):
-		self.longitude = longitude
-
-	def getLatitude(self, latitude):
-		return self.latitude
-
-	def getLongitude(self, longitude):
-		return self.longitude
-
-class Endereco():
-	def __init__(self, logradouro, bairro, cidade, telefone):
-		self.logradouro = logradouro
-		self.bairro = bairro
-		self.cidade = cidade
-		self.telefone = telefone
-
-	def setLogradouro(self, logradouro):
-		self.logradouro = logradouro
-
-	def setBairro(self, bairro):
-		self.bairro = bairro
-
-	def setCidade(self, cidade):
-		self.cidade = cidade
-
-	def setTelefone(self, telefone):
-		self.telefone = telefone
-
-	def getLogradouro(self, logradouro):
-		return self.logradouro
-
-	def getBairro(self, bairro):
-		return self.bairro
-
-	def getCidade(self, cidade):
-		return self.cidade
-
-	def getTelefone(self, telefone):
-		return self.telefone
+	def magicSet(self, atrib, value):
+		if atrib == 'numero'
+			self._numero = value
+		elif atrib == 'mensagem'
+			self._mensagem = value
