@@ -73,8 +73,8 @@ def create_cidcnes_index(list):
 	db = {}
 
 	for unidadeDeSaude in list:
-		cidval = unidadeDeSaude.magicGet('codCid')
-		cnesval = unidadeDeSaude.magicGet('codCnes')
+		cidval = unidadeDeSaude.mget('codCid')
+		cnesval = unidadeDeSaude.mget('codCnes')
 		db[cidval+cnesval] = unidadeDeSaude
 
 	return db;
@@ -84,7 +84,7 @@ def create_index_from(source, col_index):
 	for unidadeDeSaude in source:
 		index = ""
 		for key in col_index:
-			index += unidadeDeSaude.magicGet(key)
+			index += unidadeDeSaude.mget(key)
 		db[index] = unidadeDeSaude
 	return db;
 
