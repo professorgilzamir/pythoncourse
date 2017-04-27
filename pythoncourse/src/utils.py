@@ -12,6 +12,7 @@ import urllib.request as request
 import zipfile
 import io
 import os
+import entities
 
 
 BUFF_SIZE = 1024
@@ -48,7 +49,7 @@ def read_data(path):
     fdata.close()
     return data
 
-def loadlistfromcsv(URL, OUTPUT_PATH="./dt.zip", EXTRACTION_PATH="./"):
+def loadlistfromcsv(URL, OUTPUT_PATH, EXTRACTION_PATH):
     response = request.urlopen(URL)
     content_length = response.getheader('Content-Length')
     out_file = io.FileIO(OUTPUT_PATH, mode="w")    
@@ -61,7 +62,7 @@ def loadlistfromcsv(URL, OUTPUT_PATH="./dt.zip", EXTRACTION_PATH="./"):
     zfile = zipfile.ZipFile(OUTPUT_PATH)
     zfile.extractall(EXTRACTION_PATH)
     filename = [name for name in os.listdir(EXTRACTION_PATH) if '.csv' in name]
-    dt =  read_data(EXTRACTION_PATH+filename[0])
+    dt = read_data(EXTRACTION_PATH+filename[0])
     response.close()
     out_file.close()
     return dt
@@ -74,7 +75,7 @@ def create_cidcnes_index(list):
         cidval = line[cididx]
         cnesval = line[cnesidx]
         db[cidval+cnesval] = line
-    return db;
+    return db
 
 def create_index_from(source, col_index):
     db = {}
@@ -83,7 +84,7 @@ def create_index_from(source, col_index):
         for  col in col_index:
             index += line[col_index[col]]
         db[index] = line
-    return db;
+    return db
 
 def interpret(line_from_source, col_index, **kargs):
     line = []
