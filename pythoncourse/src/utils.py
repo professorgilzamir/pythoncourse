@@ -13,6 +13,7 @@ import zipfile
 import io
 import os
 import entities
+import classes
 
 
 BUFF_SIZE = 1024
@@ -41,13 +42,15 @@ def extract_filename(filename):
     return '.'.join(filename)
 
 def read_data(path):
-    fdata = open(path, 'rt', encoding="utf8")
-    data = []
-    for line in fdata:
-        linedata = line.split(',')
-        data.append(tuple(linedata))
-    fdata.close()
-    return data
+	fdata = open(path, 'rt', encoding="utf8")
+	data = []
+	for linha in fdata:
+		item = linha.split(',')
+		endereco = Endereco(item[5], item[6], item[7], item[8])
+		unidadeDeSaude = UnidadeDeSaude(item[0], item[1], item[2], item[3], item[9], item[10], item[11], endereco)
+		data.append(unidadeDeSaude)
+	fdata.close()
+	return data
 
 def loadlistfromcsv(URL, OUTPUT_PATH, EXTRACTION_PATH):
     response = request.urlopen(URL)
@@ -68,23 +71,23 @@ def loadlistfromcsv(URL, OUTPUT_PATH, EXTRACTION_PATH):
     return dt
 
 def create_cidcnes_index(list):
-    cididx = 2
-    cnesidx = 3
-    db = {}
-    for line in list:
-        cidval = line[cididx]
-        cnesval = line[cnesidx]
-        db[cidval+cnesval] = line
-    return db
+	db = {}
+
+	for unidadeDeSaude in list:
+		cidval = unidadeDeSaude.magicGet('codCid')
+		cnesval = unidadeDeSaude.magicGet('codCnes')
+		db[cidval+cnesval] = unidadeDeSaude
+
+	return db;
 
 def create_index_from(source, col_index):
-    db = {}
-    for line in source:
-        index = ""
-        for  col in col_index:
-            index += line[col_index[col]]
-        db[index] = line
-    return db
+	db = {}
+	for unidadeDeSaude in source:
+		index = ""
+		for key in col_index:
+			index += unidadeDeSaude.magicGet(key)
+		db[index] = unidadeDeSaude
+	return db;
 
 def interpret(line_from_source, col_index, **kargs):
     line = []
@@ -94,4 +97,11 @@ def interpret(line_from_source, col_index, **kargs):
         line.append(coltype(line_from_source[idx]))
     return line
 
-
+def validarTelefone(telefone):
+	t = telefone
+  #\.+[0-9]{2-3} [0-9]{3} [0-9]{2} [0-9]{4-5} [0-9]{4}
+  #(+55) 041 88 9 96234675
+	if ((len(t) == 16 or len(t) == 17) and (t[0] == '(' and t[4] == ')'))
+		print "Telefone Validado"
+	else
+		raise NumeroDeTelefoneInvalido(1)
