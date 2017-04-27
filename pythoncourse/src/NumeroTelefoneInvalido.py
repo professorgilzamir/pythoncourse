@@ -1,6 +1,6 @@
 class NumeroTelefoneInvalido(Exception):
 
-  def __init__(self, numero, mensagem = "Numerx'o de telefone invalido"):
+  def __init__(self, numero, mensagem = "Numero de telefone invalido"):
     self._numero = numero
     self._mensagem = mensagem
 
