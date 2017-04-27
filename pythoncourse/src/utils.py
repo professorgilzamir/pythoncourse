@@ -13,7 +13,11 @@ import zipfile
 import io
 import os
 import entities
+import re
 
+from src.Endereco import Endereco
+from src.UnidadeDeSaude import UnidadeDeSaude
+from src.NumeroTelefoneInvalido import NumeroTelefoneInvalido
 
 BUFF_SIZE = 1024
 
@@ -35,19 +39,23 @@ def download(response, output):
         output.write(data)
         print('Downloaded {bytes}'.format(bytes=total_downloaded))
 
-def extract_filename(filename):
+def loadlistfromcsv(filename):
     filename = filename.split('.')
     del filename[len(filename) - 1]
     return '.'.join(filename)
 
 def read_data(path):
-    fdata = open(path, 'rt', encoding="utf8")
-    data = []
-    for line in fdata:
-        linedata = line.split(',')
-        data.append(tuple(linedata))
-    fdata.close()
-    return data
+  fdata = open(path, 'rt', encoding="utf8")
+
+  data = []
+  for line in fdata:
+    atrib = line.split(',')
+    address = Endereco(atrib[5], atrib[6], atrib[7], atrib[8])
+    unit_health = UnidadeDeSaude(atrib[0], atrib[1], atrib[2], atrib[3], atrib[9], atrib[10], atrib[11], address)
+    data.append(unit_health)
+
+  fdata.close()
+  return data
 
 def loadlistfromcsv(URL, OUTPUT_PATH, EXTRACTION_PATH):
     response = request.urlopen(URL)
@@ -68,22 +76,39 @@ def loadlistfromcsv(URL, OUTPUT_PATH, EXTRACTION_PATH):
     return dt
 
 def create_cidcnes_index(list):
-    cididx = 2
-    cnesidx = 3
     db = {}
-    for line in list:
-        cidval = line[cididx]
-        cnesval = line[cnesidx]
-        db[cidval+cnesval] = line
+
+    for obj in list:
+        cidval = obj.getCodCid()
+        cnesval = obj.gtCodCnes()
+        db[cidval+cnesval] = obj
     return db
 
 def create_index_from(source, col_index):
     db = {}
-    for line in source:
+
+    for obj in source:
         index = ""
-        for  col in col_index:
-            index += line[col_index[col]]
-        db[index] = line
+
+        for atrib in col_index:
+          if atrib == 'latitude':
+            index += obj.getLatitude()
+          elif atrib == 'longitude':
+            index += obj.getLongitude()
+          elif atrib == 'codCid':
+            index += obj.getCodCid()
+          elif atrib == 'codCnes':
+            index += obj.getCodCnes()
+          elif atrib == 'dscEstFisAmb':
+            index += obj.getDscEstFisAmb()
+          elif atrib == 'dscAdapFisldo':
+            index += obj.getDscAdapFisldo()
+          elif atrib == 'sitEquipamentos':
+            index += obj.getSitEquipamentos()
+          elif atrib == 'endereco':
+            index += obj.getEndereco()
+
+        db[index] = obj
     return db
 
 def interpret(line_from_source, col_index, **kargs):
@@ -94,4 +119,18 @@ def interpret(line_from_source, col_index, **kargs):
         line.append(coltype(line_from_source[idx]))
     return line
 
+def validarTelefone(phone):
+  if not re.match('\(\d{2}\)\d{8,9}$', phone):
+    raise NumeroTelefoneInvalido(1)
 
+def menorDistancia (unit_health_ref, unit_health):
+  dist = [];
+
+  for unit in unit_health:
+    DLA = abs(unit_health_ref.getLatitude() - unit.getLatitude());
+    DLO = abs(unit_health_ref.getLongitude() - unit.getLongitude());
+    DT = sqrt((DLA * 1.852)^2 + (DLO * 1.852)^2);
+    if (DT > 0):
+      dist.append(DT)
+
+  return dist.sort()

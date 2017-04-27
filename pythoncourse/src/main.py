@@ -14,6 +14,9 @@ import utils as dw
 import entities
 import os
 
+from src.NumeroTelefoneInvalido import NumeroTelefoneInvalido
+from src.utils import validarTelefone
+
 def main():
     RESOURCE_URL = "http://repositorio.dados.gov.br/saude/unidades-saude/unidade-basica-saude/ubs.csv.zip"
 
