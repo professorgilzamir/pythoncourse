@@ -2,7 +2,7 @@ from LocalizacaoGeografica import LocalizacaoGeografica
 
 class UnidadeDeSaude(LocalizacaoGeografica):
     def __init__(self, latitude, longitude,
-                 codigo, dscEstFisAmb, dscAdapFisdo, sitEquipamentos):
+                 codigo, dscEstFisAmb, dscAdapFisdo, sitEquipamentos, endereco):
         super().__init__(latitude, longitude)
         self._codigo = codigo
         self._dscEstFisAmb = dscEstFisAmb
@@ -33,3 +33,20 @@ class UnidadeDeSaude(LocalizacaoGeografica):
     def _set_sitEquipamentos(self, sitEquipamentos):
         self._sitEquipamentos = sitEquipamentos
 
+    def _get_endereco(self):
+        return self._endereco
+
+    def _set_endereco(self, endereco):
+        self._endereco = endereco
+
+    def _get_codCid(self):
+        return self._codCid
+
+    def _set_codCid(self, codCid):
+        self._codCis = codCis
+
+    def _get_codCnes(self):
+        return self._codCnes
+
+    def _set_codCnes(self, codCnes):
+        self._codCnes = codCnes
