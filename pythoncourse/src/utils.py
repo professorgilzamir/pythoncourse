@@ -8,7 +8,12 @@ Obtém dados em arquivos da internet
 
 #coding: utf-8
 
-import string
+import urllib.request as request
+import zipfile
+import io
+import os
+import classes
+
 
 BUFF_SIZE = 1024
 
@@ -31,41 +36,66 @@ def download(response, output):
         print('Downloaded {bytes}'.format(bytes=total_downloaded))
 
 def extract_filename(filename):
-    arquivo = filename.split('.') 
-    palavra = ""
-    for x in range(0, len(arquivo) - 1):
-        if (x == 0):
-            palavra += arquivo[x]
-        else :
-            palavra += "." + arquivo[x]
-    return palavra
+    filename = filename.split('.')
+    del filename[len(filename) - 1]
+    return '.'.join(filename)
 
-def loadlistfromcsv(path):
-    fdata = open(path, 'rt', encoding="utf8")
-    data = []
-    for line in fdata:
-        linedata = line.split(',')
-        data.append(tuple(linedata))
-    fdata.close()
-    return data
+def read_data(path):
+	fdata = open(path, 'rt', encoding="utf8")
+	d = []
+	for linha in fdata:
+	   i = linha.split(',')
+		 end = Endereco(i[5], i[6], i[7], i[8])
+		 unidDeSaude = UnidadeDeSaude(i[0], i[1], i[2], i[3], i[9], i[10], i[11], end)
+		 data.append(unidadeDeSaude)
 
-def create_cidcnes_index(data):
-    dicionario = {}
-    for data in data:
-        dicionario[data[2]+data[3]] = data
-    return dicionario
+	fdata.close()
+	return data
 
-def create_index_from(source, columns_index, columns):
-  dicionario_acessado = {}
-  for i in source :
-    a = ""
-    for j in columns :
-      a = a + i[columns_index[j]]
-    dicionario_acessado[a] = i
-  return dicionario_acessado
-  
-def interpret(line_from_source, columns_index, **kargs):
-  for i, j in kargs:
-      if j == "int":
-        line_from_source[i] = int(line_from_source[i])
-  return line_from_source
+def loadlistfromcsv(URL, OUTPUT_PATH="./dt.zip", EXTRACTION_PATH="./"):
+    response = request.urlopen(URL)
+    content_length = response.getheader('Content-Length')
+    out_file = io.FileIO(OUTPUT_PATH, mode="w")    
+
+    if content_length:
+        length = int(content_length)
+        download_length(response, out_file, length)
+    else:
+        download(response, out_file)
+    
+    zfile = zipfile.ZipFile(OUTPUT_PATH)
+    zfile.extractall(EXTRACTION_PATH)
+    filename = [name for name in os.listdir(EXTRACTION_PATH) if '.csv' in name]
+    dt =  read_data(EXTRACTION_PATH+filename[0])
+    response.close()
+    out_file.close()
+    return dt
+
+def create_cidcnes_index(list):
+	db = {}
+
+	for unidDeSaude in list:
+		cidval = unidDeSaude.mget('codCid')
+		cnesval = unidDeSaude.mget('codCnes')
+		db[cidval+cnesval] = unidDeSaude
+
+	return db
+
+def create_index_from(source, col_index):
+	db = {}
+	for unidDeSaude in source:
+		index = ""
+		
+    for key in col_index:
+			index += unidDeSaude.mget(key)
+		db[index] = unidDeSaude
+	
+  return db
+
+def interpret(line_from_source, col_index, **kargs):
+    line = []
+    for key in kargs:
+        idx = col_index[key]
+        coltype = kargs[key]
+        line.append(coltype(line_from_source[idx]))
+    return line
