@@ -1,8 +1,6 @@
 '''
 Created on 9 de mar de 2017
-
 Obtém dados em arquivos da internet
-
 @author: Gilzamir (gilzamir@outlook.com)
 '''
 
@@ -13,6 +11,10 @@ import zipfile
 import io
 import os
 import entities
+from UnidadeDeSaude import UnidadeDeSaude
+from LocalizacaoGeografica import LocalizacaoGeografica
+from Endereco import Endereco
+from NumeroTelefoneInvalido import NumeroTelefoneInvalido
 
 
 BUFF_SIZE = 1024
@@ -43,16 +45,19 @@ def extract_filename(filename):
 def read_data(path):
     fdata = open(path, 'rt', encoding="utf8")
     data = []
+    unidadeDeSaude = new UnidadeDeSaude()
     for line in fdata:
         linedata = line.split(',')
-        data.append(tuple(linedata))
+        unidadeDeSaude = UnidadeDeSaude(linedade[0], linedade[1], linedade[2], linedade[3], linedade[9], linedade[10], linedade[11], endereco)
+        data.append(unidadeDeSaude)
+
     fdata.close()
     return data
 
 def loadlistfromcsv(URL, OUTPUT_PATH, EXTRACTION_PATH):
     response = request.urlopen(URL)
     content_length = response.getheader('Content-Length')
-    out_file = io.FileIO(OUTPUT_PATH, mode="w")    
+    out_file = io.FileIO(OUTPUT_PATH, mode="w")
 
     if content_length:
         length = int(content_length)
@@ -68,13 +73,11 @@ def loadlistfromcsv(URL, OUTPUT_PATH, EXTRACTION_PATH):
     return dt
 
 def create_cidcnes_index(list):
-    cididx = 2
-    cnesidx = 3
     db = {}
-    for line in list:
-        cidval = line[cididx]
-        cnesval = line[cnesidx]
-        db[cidval+cnesval] = line
+    for unidadeDeSaude in list:
+        cidval = unidadeDeSaude._get_('codCid')
+        cnesval = unidadeDeSaude._get_('codCnes')
+        db[cidval+cnesval] = unidadeDeSaude
     return db
 
 def create_index_from(source, col_index):
@@ -94,4 +97,8 @@ def interpret(line_from_source, col_index, **kargs):
         line.append(coltype(line_from_source[idx]))
     return line
 
-
+def validarTelefone(telefone):
+    if len(telefone) == 12 and len(telefone) == 13 and telefone[0] == '(' and telefone[3] == ')':
+        print "Verificado"
+    else :
+        raise Exception("Número de telefone inválido")
