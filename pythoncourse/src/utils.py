@@ -71,7 +71,7 @@ def loadlistfromcsv(URL, OUTPUT_PATH, EXTRACTION_PATH):
     response.close()
     out_file.close()
     return dt
-vv
+
 def create_cidcnes_index(list):
     db = {}
     for unidadeDeSaude in list:
