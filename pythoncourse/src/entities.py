@@ -86,6 +86,9 @@ class Endereco():
 
     def _set_telefone(self, telefone):
         self._telefone = telefone
+        
+    def validar_telefone(self, telefone):
+        pass
 
     logadouro = property(_get_logadouro, _set_logadouro)
     bairro = property(_get_bairro, _set_bairro)
