@@ -94,4 +94,7 @@ def interpret(line_from_source, col_index, **kargs):
         line.append(coltype(line_from_source[idx]))
     return line
 
+class NomeDeArquivoInvalido(Exception):
+    def __init__(self, msg):
+        Exception.__init__(self, msg)
 
