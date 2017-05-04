@@ -13,10 +13,12 @@ import zipfile
 import utils as dw
 import entities
 import os
+from src.utils import validarTelefone
+from src.NumeroTelefoneInvalido import NumeroTelefoneInvalido
 
 def main():
     RESOURCE_URL = "http://repositorio.dados.gov.br/saude/unidades-saude/unidade-basica-saude/ubs.csv.zip"
-
+    
     if os == "Windows":
         OUTPUT_PATH = os.path.expanduser("~\saida.zip")
         EXTRACTED_PATH = os.path.expanduser("~\\")
@@ -31,14 +33,6 @@ def main():
     if len(sys.argv) > 3:
         EXTRACTION_PATH = sys.argv[3]
     
-
-    '''
-    dt = dw.loadlistfromcsv(RESOURCE_URL, OUTPUT_PATH, EXTRACTION_PATH)
-    index = dw.create_index_from(dt, {'nom_stab':4})   
-
-    line = index["POSTO DE SAUDE DE ANTA"]
-    '''
-
     if (os.path.exists(OUTPUT_PATH) == 0):
         response = request.urlopen(RESOURCE_URL)
         out_file = io.FileIO(OUTPUT_PATH, mode="w")
@@ -51,24 +45,23 @@ def main():
 
         response.close()
         out_file.close()
-
     zfile = zipfile.ZipFile(OUTPUT_PATH)
     zfile.extractall(EXTRACTED_PATH)
-    filename = [name for name in os.listdir(EXTRACTED_PATH) if '.csv' in name]
-
+    filename = [name for name in os.listdir(EXTRACTED_PATH) if '.csv' in name]    
+        
     dt = dw.loadlistfromcsv(RESOURCE_URL, OUTPUT_PATH, EXTRACTED_PATH)
-    # index = dw.create_cidcnes_index(dt[1:])
-    index = dw.create_index_from(dt, {'codCid': 2})
-
-    # ===========================================================================
+    #index = dw.create_cidcnes_index(dt[1:])   
+    index = dw.create_index_from(dt, {'codCid':2})
+    
+    #===========================================================================
     # try:
-    # dw.validarTelefone("(88)992810740")
+    #     dw.validarTelefone("(88)992810740")
     # except NumeroTelefoneInvalido as nti:
-    # print(nti._mensagem);
+    #     print(nti._mensagem);
     # else:
-    # print("Numero esta no formato correto")
-    # ===========================================================================
-
+    #     print("Numero esta no formato correto")
+    #===========================================================================
+       
     print("Finished")
 
 if __name__ == "__main__":
