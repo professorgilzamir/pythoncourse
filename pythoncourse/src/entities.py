@@ -15,6 +15,9 @@ class LocalizacaoGeografica():
     def _set_longitude(self, longitude):
         self._longitude = longitude
 
+    def dist(self, objLocGeo):
+    	pass
+
     latitude = property(_get_latitude, _set_latitude)
     longitude = property(_get_longitude, _set_longitude)
 
