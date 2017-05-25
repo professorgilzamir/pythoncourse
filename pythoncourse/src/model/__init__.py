@@ -1,2 +1,2 @@
 from model.entities import *
-from model.netdata import *
+from model.netdata import (NetDataModel) 

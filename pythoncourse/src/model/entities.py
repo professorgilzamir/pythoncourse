@@ -22,21 +22,34 @@ class LocalizacaoGeografica():
     longitude = property(_get_longitude, _set_longitude)
 
 class UnidadeDeSaude(LocalizacaoGeografica):
-    def __init__(self, latitude, longitude,
-                 codigo, nome, dscEstFisAmb, dscAdapFisdo, sitEquipamentos):
-        super().__init__(latitude, longitude, ender)
-        self._codigo = codigo
+    def __init__(self, latitude, longitude, codCidade, cnes, nome, ender, dscEstFisAmb, dscAdapFisdo, sitEquipamentos, dscMedicamentos):
+        super().__init__(latitude, longitude)
         self._dscEstFisAmb = dscEstFisAmb
         self._dscAdapFisdo = dscAdapFisdo
         self._sitEquipamentos = sitEquipamentos
+        self._dscMedicamentos = dscMedicamentos
         self._nome = nome
-        self.endereco = ender
+        self._endereco = ender
+        self._cnes = cnes
+        self._codCidade = codCidade
 
-    def _get_codigo(self):
-        return self._codigo
+    def _get_dscMedicamentos(self):
+        return self._dscMedicamentos
 
-    def _set_codigo(self, codigo):
-        self._codigo = codigo
+    def _set_dscMedicamentos(self, dscMedicamentos):
+        self._dscMedicamentos = dscMedicamentos
+
+    def _get_cnes(self):
+        return self._cnes
+
+    def _set_cnes(self, cnes):
+        self._cnes = cnes
+
+    def _get_codigo_cidade(self):
+        return self._codCidade
+
+    def _set_codigo_cidade(self, codigo):
+        self._codCidade = codigo
 
     def _get_dscEstFisAmb(self):
         return self._dscEstFisAmb
@@ -56,10 +69,13 @@ class UnidadeDeSaude(LocalizacaoGeografica):
     def _set_sitEquipamentos(self, sitEquipamentos):
         self._sitEquipamentos = sitEquipamentos
 
-    codigo = property(_get_codigo, _set_codigo)
+    codCidade = property(_get_codigo_cidade, _set_codigo_cidade)
+    dscMedicamentos = property(_get_dscMedicamentos, _set_dscMedicamentos)
+    cnes = property(_get_cnes, _set_cnes)
     dscEstFisAmb = property(_get_dscEstFisAmb, _set_dscEstFisAmb)
     dscAdapFisdo = property(_get_dscAdapFisdo, _set_dscAdapFisdo)
     sitEquipamentos = property(_get_sitEquipamentos, _set_sitEquipamentos)
+
 
 class Endereco():
     def __init__(self, logadouro, bairro, cidade, telefone):
@@ -67,6 +83,7 @@ class Endereco():
         self._bairro = bairro
         self._cidade = cidade
         self._telefone = telefone
+
 
     def _get_logadouro(self):
         return self._logadouro
