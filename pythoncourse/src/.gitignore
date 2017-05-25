@@ -1,4 +1,5 @@
-/__pycache__/
-/dt.zip
-/ubs.csv
-/teste.html
+__pycache__/
+*.zip
+*.csv
+*.html
+*.pyc
