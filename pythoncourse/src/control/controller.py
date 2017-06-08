@@ -1,10 +1,11 @@
-from view import console as view
+import view
 import model
 
 class Controller():
 	def start(self):
 		self.view.menu()
 		opt = self.view.userOption()
+		print(opt)
 		while (opt != 4):
 			if opt == 1:
 				self.model.syncdata()

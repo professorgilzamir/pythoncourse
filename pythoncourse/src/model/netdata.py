@@ -59,7 +59,7 @@ class NetDataModel():
         if not re.match('\(\d{2}\)\d{8,9}$', telefone):
             raise model.NumeroTelefoneInvalido(telefone, "Telefone Inválido")
 
-    def loadlistfromcsv(self, URL, OUTPUT_PATH="./dt.zip", EXTRACTION_PATH="./"):
+    def loadlistfromcsv(self, URL, OUTPUT_PATH="dt.zip", EXTRACTION_PATH="./"):
         response = request.urlopen(URL)
         content_length = response.getheader('Content-Length')
         out_file = io.FileIO(OUTPUT_PATH, mode="w")    
@@ -107,10 +107,10 @@ class NetDataModel():
         RESOURCE_URL = "http://repositorio.dados.gov.br/saude/unidades-saude/unidade-basica-saude/ubs.csv.zip"
         
         if os == "Windows":
-            OUTPUT_PATH = os.path.expanduser("~\saida.zip")
+            OUTPUT_PATH = os.path.expanduser("saida.zip")
             EXTRACTED_PATH = os.path.expanduser("~\\")
         else:
-            OUTPUT_PATH = os.path.expanduser("~/saida.zip")
+            OUTPUT_PATH = os.path.expanduser("saida.zip")
             EXTRACTED_PATH = os.path.expanduser("~/")
 
         if len(sys.argv) > 1:
@@ -119,22 +119,6 @@ class NetDataModel():
             OUTPUT_PATH = sys.argv[2]
         if len(sys.argv) > 3:
             EXTRACTION_PATH = sys.argv[3]
-        
-        if (os.path.exists(OUTPUT_PATH) == 0):
-            response = request.urlopen(RESOURCE_URL)
-            out_file = io.FileIO(OUTPUT_PATH, mode="w")
-            content_length = response.getheader('Content-Length')
-            if content_length:
-                length = int(content_length)
-                self.download_length(response, out_file, length)
-            else:
-                self.download(response, out_file)
-
-            response.close()
-            out_file.close()
-        zfile = zipfile.ZipFile(OUTPUT_PATH)
-        zfile.extractall(EXTRACTED_PATH)
-        filename = [name for name in os.listdir(EXTRACTED_PATH) if '.csv' in name]        
         self.repository = self.loadlistfromcsv(RESOURCE_URL, OUTPUT_PATH, EXTRACTED_PATH)
 
     def searchNearUnitHealth(self, longitude, latitude):
